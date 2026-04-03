@@ -2,7 +2,7 @@ export const profileUser = {
   id: "me",
   name: "Mokopane Makhetha",
   username: "mokopane.makhetha",
-  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+  avatar: require("../assets/profle/istockphoto-1335941248-612x612.jpg"),
   bio: "Designing thoughtful interfaces, filming product moments, and refining social UI.",
   followers: "24.8K",
   following: 312
@@ -13,7 +13,7 @@ export const mockUsers = [
     id: "user-1",
     name: "Ari Sato",
     username: "arisato",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/360_F_260036118_AUYppgsODQeTCnbu0OXGNDXB8EVzpxKq.jpg"),
     bio: "Product designer with a love for tiny details.",
     isFollowing: false
   },
@@ -21,15 +21,14 @@ export const mockUsers = [
     id: "user-2",
     name: "Neo Dube",
     username: "neodube",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/close-up-portrait-young-african-man-with-stubble_171337-1296.jpg"),
     bio: "Building mobile ideas after midnight.",
     isFollowing: true
-  },
-  {
+  },  {
     id: "user-3",
     name: "Tumi Ndlovu",
     username: "tumiwrites",
-    avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/free-photo-of-portrait-of-a-woman-in-traditional-attire.jpeg"),
     bio: "Writing sharp product notes and softer captions.",
     isFollowing: false
   },
@@ -37,7 +36,7 @@ export const mockUsers = [
     id: "user-4",
     name: "Samir Khan",
     username: "samirk",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/istockphoto-1587604256-612x612.jpg"),
     bio: "Video creator and interface tinkerer.",
     isFollowing: false
   },
@@ -45,7 +44,7 @@ export const mockUsers = [
     id: "user-5",
     name: "Maya Petersen",
     username: "mayapetersen",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/London+portrait+photographer.jpg"),
     bio: "Creative direction, snapshots, and quiet routines.",
     isFollowing: true
   },
@@ -53,7 +52,7 @@ export const mockUsers = [
     id: "user-6",
     name: "Kabelo Maseko",
     username: "kabcode",
-    avatar: "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/out-now.jpg"),
     bio: "Frontend notes from the build phase.",
     isFollowing: false
   },
@@ -61,7 +60,7 @@ export const mockUsers = [
     id: "user-7",
     name: "Amina Noor",
     username: "aminanoor",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/photo-1544005313-94ddf0286df2.jpg"),
     bio: "Collecting references for motion, texture, and pace.",
     isFollowing: true
   },
@@ -69,17 +68,17 @@ export const mockUsers = [
     id: "user-8",
     name: "Luca Moretti",
     username: "luca.fm",
-    avatar: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=300&q=80",
+    avatar: require("../assets/people/360_F_260036118_AUYppgsODQeTCnbu0OXGNDXB8EVzpxKq.jpg"),
     bio: "Filming city fragments and interface studies.",
     isFollowing: false
   }
 ];
 
-const sampleVideos = {
-  joyrides: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-  blazes: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  escape: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscape.mp4",
-  elephants: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+const sampleImages = {
+  joyrides: require("../assets/Photo_posts/pexels-bertellifotografia-18966455.jpg"),
+  blazes: require("../assets/Photo_posts/pexels-bertellifotografia-19012062.jpg"),
+  escape: require("../assets/Photo_posts/pexels-introspectivedsgn-30393930.jpg"),
+  elephants: require("../assets/Photo_posts/pexels-jaralol-17091544.jpg")
 };
 
 const createReply = ({
@@ -356,10 +355,10 @@ export const mockPosts = [
     id: "post-2",
     user: mockUsers[1],
     timestamp: "18m",
-    content: "Shot a quick motion study for a feed card transition. Soft fade, small rise, nothing loud.",
+    content: "Morning build session: tweaking RPG HUD balance and a 90s arcade shader look for the next theme.",
     media: {
-      type: "video",
-      url: sampleVideos.blazes
+      type: "image",
+      url: sampleImages.blazes
     },
     liked: true,
     likes: 217,
@@ -374,10 +373,10 @@ export const mockPosts = [
     id: "post-3",
     user: mockUsers[2],
     timestamp: "41m",
-    content: "Testing video behavior in a social feed. It should feel present, not demanding.",
+    content: "Game loop question: are pause menu transitions more immersive with soft fade, or do users prefer instant feedback for high-action encounters?",
     media: {
-      type: "video",
-      url: sampleVideos.joyrides
+      type: "image",
+      url: sampleImages.joyrides
     },
     liked: false,
     likes: 96,
@@ -407,10 +406,10 @@ export const mockPosts = [
     id: "post-5",
     user: mockUsers[4],
     timestamp: "1h",
-    content: "Pulled together a few color references for a calmer creator profile. Warm neutrals, softer highlights, fewer hard edges.",
+    content: "Designing joystick-friendly inventory grids — keeping controls responsive and readable in split second fights.",
     media: {
-      type: "video",
-      url: sampleVideos.escape
+      type: "image",
+      url: sampleImages.escape
     },
     liked: false,
     likes: 143,
@@ -425,10 +424,10 @@ export const mockPosts = [
     id: "post-6",
     user: mockUsers[5],
     timestamp: "1h",
-    content: "Adding another sample clip so autoplay can be tested against faster movement and stronger contrast.",
+    content: "Level design thought: what makes a realistic game city feel alive while still performant on mobile hardware?",
     media: {
-      type: "video",
-      url: sampleVideos.blazes
+      type: "image",
+      url: sampleImages.blazes
     },
     liked: false,
     likes: 188,
@@ -458,10 +457,10 @@ export const mockPosts = [
     id: "post-8",
     user: mockUsers[7],
     timestamp: "2h",
-    content: "Saved this frame because it feels like a launch poster for a smaller, more thoughtful product.",
+    content: "Got a prototype input binding that switches combat mode with one thumb press — it feels great in practice.",
     media: {
-      type: "video",
-      url: sampleVideos.elephants
+      type: "image",
+      url: sampleImages.elephants
     },
     liked: false,
     likes: 77,
@@ -476,10 +475,10 @@ export const mockPosts = [
     id: "post-9",
     user: mockUsers[3],
     timestamp: "3h",
-    content: "One more video test. This one has longer scenes, which makes it useful for checking pause and resume as cards enter the viewport.",
+    content: "Game audio design: subtle spatial cues in laser blasts can boost clarity during crowded boss phases.",
     media: {
-      type: "video",
-      url: sampleVideos.escape
+      type: "image",
+      url: sampleImages.escape
     },
     liked: false,
     likes: 165,
@@ -509,10 +508,10 @@ export const mockPosts = [
     id: "post-11",
     user: mockUsers[1],
     timestamp: "5h",
-    content: "Keeping a fourth video link in the mix so the feed can show repeated autoplay behavior across multiple cards during longer scroll sessions.",
+    content: "Sharing early ideas about game art direction: neon city nights with texture detail optimized for 60 fps.",
     media: {
-      type: "video",
-      url: sampleVideos.elephants
+      type: "image",
+      url: sampleImages.elephants
     },
     liked: false,
     likes: 138,

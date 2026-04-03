@@ -10,8 +10,6 @@ function SettingsSheet({ visible, onClose }) {
   const {
     themeMode,
     setThemeMode,
-    autoplayVideos,
-    setAutoplayVideos,
     soundEnabled,
     setSoundEnabled
   } = useAppContext();
@@ -34,14 +32,6 @@ function SettingsSheet({ visible, onClose }) {
               <Text className="mt-1 text-xs text-firefly-300">Switch between dark and light themes</Text>
             </View>
             <Switch value={isDark} onValueChange={(value) => setThemeMode(value ? "dark" : "light")} />
-          </View>
-
-          <View className={`mb-3 flex-row items-center justify-between rounded-3xl border px-4 py-4 ${isDark ? "border-firefly-700 bg-firefly-950" : "border-firefly-200 bg-firefly-50"}`}>
-            <View>
-              <Text className={`text-sm font-semibold ${isDark ? "text-firefly-50" : "text-firefly-900"}`}>Autoplay video</Text>
-              <Text className="mt-1 text-xs text-firefly-300">Play videos when they scroll into view</Text>
-            </View>
-            <Switch value={autoplayVideos} onValueChange={setAutoplayVideos} />
           </View>
 
           <View className={`flex-row items-center justify-between rounded-3xl border px-4 py-4 ${isDark ? "border-firefly-700 bg-firefly-950" : "border-firefly-200 bg-firefly-50"}`}>

@@ -40,7 +40,7 @@ function ReplyPreview({ users, onPress }) {
 }
 
 function MediaAttachment({ media, visible }) {
-  const { autoplayVideos, soundEnabled } = useAppContext();
+  const { soundEnabled } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [muted, setMuted] = useState(!soundEnabled);
 
@@ -57,15 +57,15 @@ function MediaAttachment({ media, visible }) {
     return null;
   }
 
-  if (!visible) {
-    return (
-      <View className="mt-3 h-64 items-center justify-center rounded-3xl border border-firefly-700 bg-firefly-900">
-        <Text className="text-xs text-firefly-300">Media loads when visible</Text>
-      </View>
-    );
-  }
-
   if (media.type === "video") {
+    if (!visible) {
+      return (
+        <View className="mt-3 h-64 items-center justify-center rounded-3xl border border-firefly-700 bg-firefly-900">
+          <Text className="text-xs text-firefly-300">Video loads when visible</Text>
+        </View>
+      );
+    }
+
     return (
       <Pressable
         onPress={() => setMuted((current) => !current)}
@@ -77,16 +77,15 @@ function MediaAttachment({ media, visible }) {
           </View>
         ) : null}
         <Video
-          source={{ uri: media.url }}
-          className="h-64 w-full"
-          resizeMode={ResizeMode.COVER}
-          isMuted={muted}
-          // Videos only autoplay while their card is visible in the feed.
-          shouldPlay={autoplayVideos && visible}
-          isLooping
-          onLoadStart={() => setLoading(true)}
-          onReadyForDisplay={() => setLoading(false)}
-        />
+            source={{ uri: media.url }}
+            className="h-64 w-full"
+            resizeMode={ResizeMode.COVER}
+            isMuted={muted}
+            shouldPlay={visible}
+            isLooping
+            onLoadStart={() => setLoading(true)}
+            onReadyForDisplay={() => setLoading(false)}
+          />
         <View className="absolute bottom-3 right-3 rounded-full bg-firefly-950/80 px-3 py-1.5">
           <Text className="text-xs font-medium text-firefly-50">{muted ? "Muted" : "Sound on"}</Text>
         </View>

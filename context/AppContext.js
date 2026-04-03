@@ -51,7 +51,6 @@ function updatePostTree(posts, postId, updater) {
 
 export function AppProvider({ children }) {
   const [themeMode, setThemeMode] = useState("dark");
-  const [autoplayVideos, setAutoplayVideos] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [posts, setPosts] = useState(mockPosts);
   const [users, setUsers] = useState(mockUsers);
@@ -111,8 +110,6 @@ export function AppProvider({ children }) {
     () => ({
       themeMode,
       setThemeMode,
-      autoplayVideos,
-      setAutoplayVideos,
       soundEnabled,
       setSoundEnabled,
       posts,
@@ -124,7 +121,7 @@ export function AppProvider({ children }) {
       createPost,
       getPostById
     }),
-    [themeMode, autoplayVideos, soundEnabled, posts, users, notifications]
+    [themeMode, soundEnabled, posts, users, notifications]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -2,42 +2,48 @@ import "./global.css";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Animated, Image, StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppProvider, useAppContext } from "./context/AppContext";
 import TabNavigator from "./navigation/TabNavigator";
 
-SplashScreen.setOptions({
-  duration: 650,
-  fade: true
-});
+const THREADS_LOGO = require("./assets/threads-logo-black-background-vector_1017-45262.jpg");
 
-SplashScreen.preventAutoHideAsync().catch(() => {
-  // Splash can already be locked by the runtime in development reloads.
-});
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+// Full-screen overlay that shows the Threads logo then fades out.
+function SplashOverlay({ onFinished }) {
+  const opacity = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    // Hold the logo for 1.5 s then fade over 700 ms.
+    const timer = setTimeout(() => {
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 700,
+        useNativeDriver: true,
+      }).start(() => onFinished());
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject, styles.splash, { opacity }]}>
+      <Image source={THREADS_LOGO} style={styles.logo} resizeMode="contain" />
+    </Animated.View>
+  );
+}
 
 function AppShell() {
   const { themeMode } = useAppContext();
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [splashVisible, setSplashVisible] = useState(true);
   const isDark = themeMode === "dark";
 
-  useEffect(() => {
-    async function prepare() {
-      // Keep the splash visible long enough for the logo fade to feel intentional.
-      await new Promise((resolve) => setTimeout(resolve, 1700));
-      setAppIsReady(true);
-    }
-
-    prepare();
-  }, []);
-
+  // Hide the native Expo splash as soon as the JS layout is painted.
   const onLayoutRootView = useCallback(() => {
-    if (appIsReady) {
-      // Hide the splash only after the first app layout is ready.
-      SplashScreen.hideAsync().catch(() => {});
-    }
-  }, [appIsReady]);
+    SplashScreen.hideAsync().catch(() => {});
+  }, []);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -48,13 +54,9 @@ function AppShell() {
       border: isDark ? "#2c3e40" : "#90c0c8",
       text: isDark ? "#e3f4f7" : "#121c1d",
       primary: isDark ? "#e3f4f7" : "#121c1d",
-      notification: "#63868b"
-    }
+      notification: "#63868b",
+    },
   };
-
-  if (!appIsReady) {
-    return <View className={`flex-1 ${isDark ? "bg-firefly-950" : "bg-firefly-50"}`} />;
-  }
 
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
@@ -62,9 +64,26 @@ function AppShell() {
         <StatusBar style={isDark ? "light" : "dark"} />
         <TabNavigator />
       </NavigationContainer>
+
+      {/* Custom splash sits on top of everything and fades out once ready. */}
+      {splashVisible && <SplashOverlay onFinished={() => setSplashVisible(false)} />}
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  splash: {
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 999,
+  },
+  logo: {
+    width: 110,
+    height: 110,
+    borderRadius: 22,
+  },
+});
 
 export default function App() {
   return (
