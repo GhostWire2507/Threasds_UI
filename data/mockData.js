@@ -78,7 +78,15 @@ const sampleImages = {
   joyrides: require("../assets/Photo_posts/pexels-bertellifotografia-18966455.jpg"),
   blazes: require("../assets/Photo_posts/pexels-bertellifotografia-19012062.jpg"),
   escape: require("../assets/Photo_posts/pexels-introspectivedsgn-30393930.jpg"),
-  elephants: require("../assets/Photo_posts/pexels-jaralol-17091544.jpg")
+  elephants: require("../assets/Photo_posts/pexels-jaralol-17091544.jpg"),
+  kasra: require("../assets/Photo_posts/pexels-kasra-askari-273404874-12877877.jpg"),
+  kevin: require("../assets/Photo_posts/pexels-kevin-malik-8762843.jpg"),
+  lisbon1: require("../assets/Photo_posts/pexels-lisbon-tackie-384727470-14740027.jpg"),
+  lisbon2: require("../assets/Photo_posts/pexels-lisbon-tackie-384727470-14740033.jpg"),
+  mikhail1: require("../assets/Photo_posts/pexels-mikhail-nilov-7887631.jpg"),
+  mikhail2: require("../assets/Photo_posts/pexels-mikhail-nilov-7887634.jpg"),
+  paul: require("../assets/Photo_posts/pexels-paul-1683381-29017683.jpg"),
+  pavel: require("../assets/Photo_posts/pexels-pavel-danilyuk-7776904.jpg")
 };
 
 const createReply = ({
@@ -340,8 +348,11 @@ export const mockPosts = [
     id: "post-1",
     user: mockUsers[0],
     timestamp: "2m",
-    content: "Threads works best when the interface disappears and the writing stays in focus. Tiny spacing choices do most of the heavy lifting.",
-    media: null,
+    content: "New season idea: add a match-making rank emblem that updates with a local weather effect in the UI.",
+    media: {
+      type: "image",
+      url: sampleImages.kasra
+    },
     liked: false,
     likes: 84,
     replies: 11,
@@ -358,7 +369,7 @@ export const mockPosts = [
     content: "Morning build session: tweaking RPG HUD balance and a 90s arcade shader look for the next theme.",
     media: {
       type: "image",
-      url: sampleImages.blazes
+      url: sampleImages.kevin
     },
     liked: true,
     likes: 217,
@@ -376,7 +387,7 @@ export const mockPosts = [
     content: "Game loop question: are pause menu transitions more immersive with soft fade, or do users prefer instant feedback for high-action encounters?",
     media: {
       type: "image",
-      url: sampleImages.joyrides
+      url: sampleImages.lisbon1
     },
     liked: false,
     likes: 96,
@@ -391,8 +402,11 @@ export const mockPosts = [
     id: "post-4",
     user: mockUsers[3],
     timestamp: "1h",
-    content: "The best UI compliment is when nobody mentions the UI because everything just flows.",
-    media: null,
+    content: "Opinions: should loot rarity glow intensity scale with player progression or remain constant for readability",
+    media: {
+      type: "image",
+      url: sampleImages.lisbon2
+    },
     liked: false,
     likes: 53,
     replies: 3,
@@ -409,7 +423,7 @@ export const mockPosts = [
     content: "Designing joystick-friendly inventory grids — keeping controls responsive and readable in split second fights.",
     media: {
       type: "image",
-      url: sampleImages.escape
+      url: sampleImages.mikhail1
     },
     liked: false,
     likes: 143,
@@ -427,7 +441,7 @@ export const mockPosts = [
     content: "Level design thought: what makes a realistic game city feel alive while still performant on mobile hardware?",
     media: {
       type: "image",
-      url: sampleImages.blazes
+      url: sampleImages.mikhail2
     },
     liked: false,
     likes: 188,
@@ -442,8 +456,11 @@ export const mockPosts = [
     id: "post-7",
     user: mockUsers[6],
     timestamp: "2h",
-    content: "The strongest social apps give text enough room to feel authored, not just posted.",
-    media: null,
+    content: "Testing the new control scheme: contextual radial menu makes weapon selection faster without extra taps.",
+    media: {
+      type: "image",
+      url: sampleImages.paul
+    },
     liked: true,
     likes: 121,
     replies: 8,
@@ -460,7 +477,7 @@ export const mockPosts = [
     content: "Got a prototype input binding that switches combat mode with one thumb press — it feels great in practice.",
     media: {
       type: "image",
-      url: sampleImages.elephants
+      url: sampleImages.pavel
     },
     liked: false,
     likes: 77,
@@ -478,7 +495,7 @@ export const mockPosts = [
     content: "Game audio design: subtle spatial cues in laser blasts can boost clarity during crowded boss phases.",
     media: {
       type: "image",
-      url: sampleImages.escape
+      url: sampleImages.joyrides
     },
     liked: false,
     likes: 165,
@@ -493,8 +510,11 @@ export const mockPosts = [
     id: "post-10",
     user: mockUsers[0],
     timestamp: "4h",
-    content: "Documenting the defaults I keep coming back to: rounded media, quiet borders, slightly tighter timestamps, and generous line height.",
-    media: null,
+    content: "Future tech thread: how can ray tracing and foveated rendering coexist on handheld consoles in the next generation?",
+    media: {
+      type: "image",
+      url: sampleImages.blazes
+    },
     liked: false,
     likes: 92,
     replies: 9,
@@ -511,7 +531,7 @@ export const mockPosts = [
     content: "Sharing early ideas about game art direction: neon city nights with texture detail optimized for 60 fps.",
     media: {
       type: "image",
-      url: sampleImages.elephants
+      url: sampleImages.escape
     },
     liked: false,
     likes: 138,
