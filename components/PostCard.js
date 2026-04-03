@@ -69,16 +69,16 @@ function MediaAttachment({ media, visible }) {
     return (
       <Pressable
         onPress={() => setMuted((current) => !current)}
-        className="mt-3 overflow-hidden rounded-3xl border border-firefly-700 bg-firefly-900"
+        className="mt-3 h-64 overflow-hidden rounded-3xl border border-firefly-700 bg-firefly-900"
       >
         {loading ? (
-          <View className="absolute inset-0 z-10 h-64 items-center justify-center bg-firefly-900/80">
+          <View className="absolute inset-0 z-10 h-full items-center justify-center bg-firefly-900/80">
             <ActivityIndicator color="#e3f4f7" />
           </View>
         ) : null}
         <Video
             source={{ uri: media.url }}
-            className="h-64 w-full"
+            className="h-full w-full"
             resizeMode={ResizeMode.COVER}
             isMuted={muted}
             shouldPlay={visible}
@@ -94,15 +94,15 @@ function MediaAttachment({ media, visible }) {
   }
 
   return (
-    <View className="mt-3 overflow-hidden rounded-3xl border border-firefly-700 bg-firefly-900">
+    <View className="mt-3 h-64 overflow-hidden rounded-3xl border border-firefly-700 bg-firefly-900">
       {loading ? (
-        <View className="absolute inset-0 z-10 h-64 items-center justify-center bg-firefly-900/80">
+        <View className="absolute inset-0 z-10 h-full items-center justify-center bg-firefly-900/80">
           <ActivityIndicator color="#e3f4f7" />
         </View>
       ) : null}
       <Image
         source={media.url}
-        className="h-64 w-full"
+        className="h-full w-full"
         contentFit="cover"
         transition={180}
         cachePolicy="memory-disk"
