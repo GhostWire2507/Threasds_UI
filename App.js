@@ -1,13 +1,36 @@
 import "./global.css";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { useCallback, useEffect, useState } from "react";
+import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppProvider, useAppContext } from "./context/AppContext";
 import TabNavigator from "./navigation/TabNavigator";
 
+SplashScreen.preventAutoHideAsync().catch(() => {
+  // Splash can already be locked by the runtime in development reloads.
+});
+
 function AppShell() {
   const { themeMode } = useAppContext();
+  const [appIsReady, setAppIsReady] = useState(false);
   const isDark = themeMode === "dark";
+
+  useEffect(() => {
+    async function prepare() {
+      await new Promise((resolve) => setTimeout(resolve, 1800));
+      setAppIsReady(true);
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady) {
+      SplashScreen.hideAsync().catch(() => {});
+    }
+  }, [appIsReady]);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -22,8 +45,12 @@ function AppShell() {
     }
   };
 
+  if (!appIsReady) {
+    return <View className={`flex-1 ${isDark ? "bg-firefly-950" : "bg-firefly-50"}`} />;
+  }
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider onLayout={onLayoutRootView}>
       <NavigationContainer theme={navigationTheme}>
         <StatusBar style={isDark ? "light" : "dark"} />
         <TabNavigator />

@@ -7,8 +7,8 @@ import Avatar from "./Avatar";
 import ThreadLine from "./ThreadLine";
 import { useAppContext } from "../context/AppContext";
 
-function ReplyPreview({ users }) {
-  return (
+function ReplyPreview({ users, onPress }) {
+  const content = (
     <View className="mt-3 flex-row items-center">
       <View className="mr-3 flex-row">
         {users.map((user, index) => (
@@ -20,8 +20,18 @@ function ReplyPreview({ users }) {
           />
         ))}
       </View>
-      <Text className="text-xs text-firefly-300">replies from people you follow</Text>
+      <Text className="text-xs text-firefly-300">Tap to view replies</Text>
     </View>
+  );
+
+  if (!onPress) {
+    return content;
+  }
+
+  return (
+    <Pressable onPress={onPress} style={({ pressed }) => [{ opacity: pressed ? 0.75 : 1 }]}>
+      {content}
+    </Pressable>
   );
 }
 
@@ -92,7 +102,7 @@ function MediaAttachment({ media, visible }) {
   );
 }
 
-export default function PostCard({ post, visible = true, onProfilePress, index = 0 }) {
+export default function PostCard({ post, visible = true, onProfilePress, onReplyPress, index = 0 }) {
   const { toggleLike, themeMode } = useAppContext();
   const isDark = themeMode === "dark";
   const entrance = useRef(new Animated.Value(0)).current;
@@ -166,9 +176,10 @@ export default function PostCard({ post, visible = true, onProfilePress, index =
             reposts={post.reposts}
             shares={post.shares}
             onLikePress={() => toggleLike(post.id)}
+            onReplyPress={onReplyPress}
           />
 
-          {post.replyPreview?.length ? <ReplyPreview users={post.replyPreview} /> : null}
+          {post.replyPreview?.length ? <ReplyPreview users={post.replyPreview} onPress={onReplyPress} /> : null}
         </View>
       </View>
     </Animated.View>

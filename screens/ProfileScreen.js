@@ -57,7 +57,7 @@ function SettingsSheet({ visible, onClose }) {
   );
 }
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const { posts, profileUser, themeMode } = useAppContext();
   const [activeTab, setActiveTab] = useState("threads");
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -121,7 +121,14 @@ export default function ProfileScreen() {
             </View>
           </View>
         }
-        renderItem={({ item, index }) => <PostCard post={item} visible index={index} />}
+        renderItem={({ item, index }) => (
+          <PostCard
+            post={item}
+            visible
+            index={index}
+            onReplyPress={() => navigation.navigate("Replies", { postId: item.id })}
+          />
+        )}
       />
 
       <SettingsSheet visible={settingsOpen} onClose={() => setSettingsOpen(false)} />

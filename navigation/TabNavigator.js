@@ -5,6 +5,7 @@ import ActivityScreen from "../screens/ActivityScreen";
 import CreatePostScreen from "../screens/CreatePostScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import RepliesScreen from "../screens/RepliesScreen";
 import SearchScreen from "../screens/SearchScreen";
 
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,7 @@ export default function TabNavigator() {
           animation: "slide_from_bottom"
         }}
       />
+      <Stack.Screen name="Replies" component={RepliesScreen} />
     </Stack.Navigator>
   );
 }

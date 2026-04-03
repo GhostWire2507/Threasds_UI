@@ -20,7 +20,8 @@ export default function ActionBar({
   replies,
   reposts,
   shares,
-  onLikePress
+  onLikePress,
+  onReplyPress
 }) {
   const likeScale = useRef(new Animated.Value(1)).current;
 
@@ -52,7 +53,7 @@ export default function ActionBar({
         </Animated.View>
       </StatButton>
 
-      <StatButton onPress={() => {}}>
+      <StatButton onPress={onReplyPress}>
         <View className="flex-row items-center">
           <Feather name="message-circle" size={20} color="#78a2a8" />
           <Text className="ml-1 text-xs text-firefly-300">{replies}</Text>

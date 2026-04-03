@@ -5,6 +5,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/threads-logo-black-background-vector_1017-45262.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#0b1213"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -13,6 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/threads-logo-black-background-vector_1017-45262.jpg",
         "backgroundColor": "#0b1213"
       }
     }

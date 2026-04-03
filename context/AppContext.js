@@ -3,6 +3,50 @@ import { mockNotifications, mockPosts, mockUsers, profileUser } from "../data/mo
 
 const AppContext = createContext(null);
 
+function inferMediaType(mediaUrl) {
+  if (!mediaUrl) {
+    return null;
+  }
+
+  const sanitizedUrl = mediaUrl.split("?")[0].toLowerCase();
+  const isVideo = /\.(mp4|mov|webm|m4v)$/i.test(sanitizedUrl);
+
+  return isVideo ? "video" : "image";
+}
+
+function findPost(posts, postId) {
+  for (const post of posts) {
+    if (post.id === postId) {
+      return post;
+    }
+
+    const nestedMatch = findPost(post.repliesData ?? [], postId);
+
+    if (nestedMatch) {
+      return nestedMatch;
+    }
+  }
+
+  return null;
+}
+
+function updatePostTree(posts, postId, updater) {
+  return posts.map((post) => {
+    if (post.id === postId) {
+      return updater(post);
+    }
+
+    if (!post.repliesData?.length) {
+      return post;
+    }
+
+    return {
+      ...post,
+      repliesData: updatePostTree(post.repliesData, postId, updater)
+    };
+  });
+}
+
 export function AppProvider({ children }) {
   const [themeMode, setThemeMode] = useState("dark");
   const [autoplayVideos, setAutoplayVideos] = useState(true);
@@ -13,15 +57,11 @@ export function AppProvider({ children }) {
 
   const toggleLike = (postId) => {
     setPosts((current) =>
-      current.map((post) =>
-        post.id === postId
-          ? {
-              ...post,
-              liked: !post.liked,
-              likes: post.liked ? post.likes - 1 : post.likes + 1
-            }
-          : post
-      )
+      updatePostTree(current, postId, (post) => ({
+        ...post,
+        liked: !post.liked,
+        likes: post.liked ? post.likes - 1 : post.likes + 1
+      }))
     );
   };
 
@@ -41,7 +81,7 @@ export function AppProvider({ children }) {
       return;
     }
 
-    const mediaType = trimmedMedia.match(/\.(mp4|mov|webm)$/i) ? "video" : trimmedMedia ? "image" : null;
+    const mediaType = inferMediaType(trimmedMedia);
 
     const newPost = {
       id: `post-${Date.now()}`,
@@ -54,12 +94,15 @@ export function AppProvider({ children }) {
       replies: 0,
       reposts: 0,
       shares: 0,
-      replyPreview: users.slice(0, 3),
-      isReplyThread: true
+      replyPreview: [],
+      isReplyThread: false,
+      repliesData: []
     };
 
     setPosts((current) => [newPost, ...current]);
   };
+
+  const getPostById = (postId) => findPost(posts, postId);
 
   const value = useMemo(
     () => ({
@@ -75,7 +118,8 @@ export function AppProvider({ children }) {
       profileUser,
       toggleLike,
       toggleFollow,
-      createPost
+      createPost,
+      getPostById
     }),
     [themeMode, autoplayVideos, soundEnabled, posts, users, notifications]
   );
