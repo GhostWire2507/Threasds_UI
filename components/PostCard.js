@@ -100,14 +100,21 @@ function MediaAttachment({ media, visible }) {
           <ActivityIndicator color="#e3f4f7" />
         </View>
       ) : null}
+      {/* Diagnostic: Hardcoded test image */}
       <Image
         source={media.url}
         className="h-full w-full"
         contentFit="cover"
         transition={180}
         cachePolicy="memory-disk"
-        onLoad={() => setLoading(false)}
-        onError={() => setLoading(false)}
+        onLoad={() => {
+          console.log('Post image loaded:', media.url);
+          setLoading(false);
+        }}
+        onError={(error) => {
+          console.log('Post image error:', error, media.url);
+          setLoading(false);
+        }}
       />
     </View>
   );

@@ -89,6 +89,19 @@ const sampleImages = {
   pavel: require("../assets/Photo_posts/pexels-pavel-danilyuk-7776904.jpg")
 };
 
+// Direct image assignments - one image per post
+const post1Image = sampleImages.kasra;
+const post2Image = sampleImages.kevin;
+const post3Image = sampleImages.lisbon1;
+const post4Image = sampleImages.lisbon2;
+const post5Image = sampleImages.mikhail1;
+const post6Image = sampleImages.mikhail2;
+const post7Image = sampleImages.paul;
+const post8Image = sampleImages.pavel;
+const post9Image = sampleImages.joyrides;
+const post10Image = sampleImages.blazes;
+const post11Image = sampleImages.escape;
+
 const createReply = ({
   id,
   user,
@@ -351,7 +364,7 @@ export const mockPosts = [
     content: "New season idea: add a match-making rank emblem that updates with a local weather effect in the UI.",
     media: {
       type: "image",
-      url: sampleImages.kasra
+      url: post1Image
     },
     liked: false,
     likes: 84,
@@ -369,7 +382,7 @@ export const mockPosts = [
     content: "Morning build session: tweaking RPG HUD balance and a 90s arcade shader look for the next theme.",
     media: {
       type: "image",
-      url: sampleImages.kevin
+      url: post2Image
     },
     liked: true,
     likes: 217,
@@ -387,7 +400,7 @@ export const mockPosts = [
     content: "Game loop question: are pause menu transitions more immersive with soft fade, or do users prefer instant feedback for high-action encounters?",
     media: {
       type: "image",
-      url: sampleImages.lisbon1
+      url: post3Image
     },
     liked: false,
     likes: 96,
@@ -405,7 +418,7 @@ export const mockPosts = [
     content: "Opinions: should loot rarity glow intensity scale with player progression or remain constant for readability",
     media: {
       type: "image",
-      url: sampleImages.lisbon2
+      url: post4Image
     },
     liked: false,
     likes: 53,
@@ -423,7 +436,7 @@ export const mockPosts = [
     content: "Designing joystick-friendly inventory grids — keeping controls responsive and readable in split second fights.",
     media: {
       type: "image",
-      url: sampleImages.mikhail1
+      url: post5Image
     },
     liked: false,
     likes: 143,
@@ -441,7 +454,7 @@ export const mockPosts = [
     content: "Level design thought: what makes a realistic game city feel alive while still performant on mobile hardware?",
     media: {
       type: "image",
-      url: sampleImages.mikhail2
+      url: post6Image
     },
     liked: false,
     likes: 188,
@@ -459,7 +472,7 @@ export const mockPosts = [
     content: "Testing the new control scheme: contextual radial menu makes weapon selection faster without extra taps.",
     media: {
       type: "image",
-      url: sampleImages.paul
+      url: post7Image
     },
     liked: true,
     likes: 121,
@@ -477,7 +490,7 @@ export const mockPosts = [
     content: "Got a prototype input binding that switches combat mode with one thumb press — it feels great in practice.",
     media: {
       type: "image",
-      url: sampleImages.pavel
+      url: post8Image
     },
     liked: false,
     likes: 77,
@@ -495,7 +508,7 @@ export const mockPosts = [
     content: "Game audio design: subtle spatial cues in laser blasts can boost clarity during crowded boss phases.",
     media: {
       type: "image",
-      url: sampleImages.joyrides
+      url: post9Image
     },
     liked: false,
     likes: 165,
@@ -513,7 +526,7 @@ export const mockPosts = [
     content: "Future tech thread: how can ray tracing and foveated rendering coexist on handheld consoles in the next generation?",
     media: {
       type: "image",
-      url: sampleImages.blazes
+      url: post10Image
     },
     liked: false,
     likes: 92,
@@ -531,7 +544,7 @@ export const mockPosts = [
     content: "Sharing early ideas about game art direction: neon city nights with texture detail optimized for 60 fps.",
     media: {
       type: "image",
-      url: sampleImages.escape
+      url: post11Image
     },
     liked: false,
     likes: 138,

@@ -13,15 +13,9 @@ export default function HomeScreen({ navigation }) {
   const isDark = themeMode === "dark";
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 45 }).current;
 
-  useEffect(() => {
-    // Warm up the first few feed images before the user scrolls to them.
-    const imageUrls = posts
-      .slice(0, 6)
-      .flatMap((post) => [post.user.avatar, post.media?.type === "image" ? post.media.url : null])
-      .filter(Boolean);
+  // Removed prefetch: incompatible with local require() modules (expects uri strings).
+  // expo-image cachePolicy="memory-disk" handles caching automatically.
 
-    Image.prefetch(imageUrls);
-  }, [posts]);
 
   const handleViewableItemsChanged = useRef(({ viewableItems }) => {
     // Track which cards are actually on screen for media playback.
