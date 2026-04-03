@@ -45,6 +45,7 @@ function MediaAttachment({ media, visible }) {
   const [muted, setMuted] = useState(!soundEnabled);
 
   useEffect(() => {
+    // Reset the loader whenever a new media item is attached.
     setLoading(Boolean(media));
   }, [media?.url, media?.type]);
 
@@ -80,6 +81,7 @@ function MediaAttachment({ media, visible }) {
           className="h-64 w-full"
           resizeMode={ResizeMode.COVER}
           isMuted={muted}
+          // Videos only autoplay while their card is visible in the feed.
           shouldPlay={autoplayVideos && visible}
           isLooping
           onLoadStart={() => setLoading(true)}
@@ -118,6 +120,7 @@ function PostCard({ post, visible = true, onProfilePress, onReplyPress, index = 
   const entrance = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    // Stagger cards slightly so the feed enters more smoothly.
     Animated.timing(entrance, {
       toValue: 1,
       duration: 380,

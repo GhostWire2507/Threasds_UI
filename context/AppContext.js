@@ -20,6 +20,7 @@ function findPost(posts, postId) {
       return post;
     }
 
+    // Replies can also open their own reply screen.
     const nestedMatch = findPost(post.repliesData ?? [], postId);
 
     if (nestedMatch) {
@@ -42,6 +43,7 @@ function updatePostTree(posts, postId, updater) {
 
     return {
       ...post,
+      // Keep likes working for both feed posts and nested replies.
       repliesData: updatePostTree(post.repliesData, postId, updater)
     };
   });
@@ -83,6 +85,7 @@ export function AppProvider({ children }) {
 
     const mediaType = inferMediaType(trimmedMedia);
 
+    // New posts are inserted at the top of the feed.
     const newPost = {
       id: `post-${Date.now()}`,
       user: profileUser,

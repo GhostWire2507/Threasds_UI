@@ -14,6 +14,7 @@ export default function HomeScreen({ navigation }) {
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 45 }).current;
 
   useEffect(() => {
+    // Warm up the first few feed images before the user scrolls to them.
     const imageUrls = posts
       .slice(0, 6)
       .flatMap((post) => [post.user.avatar, post.media?.type === "image" ? post.media.url : null])
@@ -23,6 +24,7 @@ export default function HomeScreen({ navigation }) {
   }, [posts]);
 
   const handleViewableItemsChanged = useRef(({ viewableItems }) => {
+    // Track which cards are actually on screen for media playback.
     const next = {};
     viewableItems.forEach((item) => {
       next[item.item.id] = true;

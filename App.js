@@ -24,6 +24,7 @@ function AppShell() {
 
   useEffect(() => {
     async function prepare() {
+      // Keep the splash visible long enough for the logo fade to feel intentional.
       await new Promise((resolve) => setTimeout(resolve, 1700));
       setAppIsReady(true);
     }
@@ -33,6 +34,7 @@ function AppShell() {
 
   const onLayoutRootView = useCallback(() => {
     if (appIsReady) {
+      // Hide the splash only after the first app layout is ready.
       SplashScreen.hideAsync().catch(() => {});
     }
   }, [appIsReady]);

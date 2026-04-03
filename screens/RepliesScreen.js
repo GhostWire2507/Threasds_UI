@@ -45,6 +45,7 @@ export default function RepliesScreen({ navigation, route }) {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View>
+            {/* Show the original thread above its reply list. */}
             <PostCard post={post} visible />
             <View className={`border-b px-4 py-3 ${isDark ? "border-firefly-700" : "border-firefly-200"}`}>
               <Text className="text-xs font-semibold uppercase tracking-[1.4px] text-firefly-300">Conversation</Text>
