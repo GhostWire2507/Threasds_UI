@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --firefly-50: #e3f4f7;
+  --firefly-100: #b1e3eb;
+  --firefly-200: #90c0c8;
+  --firefly-300: #78a2a8;
+  --firefly-400: #63868b;
+  --firefly-500: #4f6c70;
+  --firefly-600: #3d5457;
+  --firefly-700: #2c3e40;
+  --firefly-800: #1c292b;
+  --firefly-900: #121c1d;
+  --firefly-950: #0b1213;
+}
