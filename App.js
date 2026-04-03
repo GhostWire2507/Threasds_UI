@@ -8,6 +8,11 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppProvider, useAppContext } from "./context/AppContext";
 import TabNavigator from "./navigation/TabNavigator";
 
+SplashScreen.setOptions({
+  duration: 650,
+  fade: true
+});
+
 SplashScreen.preventAutoHideAsync().catch(() => {
   // Splash can already be locked by the runtime in development reloads.
 });
@@ -19,7 +24,7 @@ function AppShell() {
 
   useEffect(() => {
     async function prepare() {
-      await new Promise((resolve) => setTimeout(resolve, 1800));
+      await new Promise((resolve) => setTimeout(resolve, 1700));
       setAppIsReady(true);
     }
 

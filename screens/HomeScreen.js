@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useRef, useState } from "react";
-import { FlatList, Image, View } from "react-native";
+import { Image } from "expo-image";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PostCard from "../components/PostCard";
 import { useAppContext } from "../context/AppContext";
@@ -11,6 +12,15 @@ export default function HomeScreen({ navigation }) {
   const [visibleIds, setVisibleIds] = useState({});
   const isDark = themeMode === "dark";
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 45 }).current;
+
+  useEffect(() => {
+    const imageUrls = posts
+      .slice(0, 6)
+      .flatMap((post) => [post.user.avatar, post.media?.type === "image" ? post.media.url : null])
+      .filter(Boolean);
+
+    Image.prefetch(imageUrls);
+  }, [posts]);
 
   const handleViewableItemsChanged = useRef(({ viewableItems }) => {
     const next = {};
@@ -36,7 +46,7 @@ export default function HomeScreen({ navigation }) {
   const logo = useMemo(
     () => (
       <View className={`items-center justify-center py-3 ${isDark ? "bg-firefly-950" : "bg-firefly-50"}`}>
-        <Image source={threadsLogo} className="h-10 w-10 rounded-full" resizeMode="cover" />
+        <Image source={threadsLogo} className="h-10 w-10 rounded-full" contentFit="cover" transition={120} />
       </View>
     ),
     [isDark]
@@ -49,6 +59,10 @@ export default function HomeScreen({ navigation }) {
         data={posts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        initialNumToRender={5}
+        maxToRenderPerBatch={5}
+        windowSize={5}
+        removeClippedSubviews={false}
         showsVerticalScrollIndicator={false}
         onViewableItemsChanged={handleViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}

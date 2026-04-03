@@ -1,7 +1,8 @@
 import { Feather } from "@expo/vector-icons";
 import { Video, ResizeMode } from "expo-av";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ActivityIndicator, Animated, Image, Pressable, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { ActivityIndicator, Animated, Pressable, Text, View } from "react-native";
 import ActionBar from "./ActionBar";
 import Avatar from "./Avatar";
 import ThreadLine from "./ThreadLine";
@@ -14,9 +15,12 @@ function ReplyPreview({ users, onPress }) {
         {users.map((user, index) => (
           <Image
             key={user.id}
-            source={{ uri: user.avatar }}
+            source={user.avatar}
             className="-mr-2 h-6 w-6 rounded-full border border-firefly-950"
             style={{ zIndex: users.length - index }}
+            contentFit="cover"
+            transition={120}
+            cachePolicy="memory-disk"
           />
         ))}
       </View>
@@ -39,6 +43,10 @@ function MediaAttachment({ media, visible }) {
   const { autoplayVideos, soundEnabled } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [muted, setMuted] = useState(!soundEnabled);
+
+  useEffect(() => {
+    setLoading(Boolean(media));
+  }, [media?.url, media?.type]);
 
   useEffect(() => {
     setMuted(!soundEnabled);
@@ -92,17 +100,19 @@ function MediaAttachment({ media, visible }) {
         </View>
       ) : null}
       <Image
-        source={{ uri: media.url }}
+        source={media.url}
         className="h-64 w-full"
-        resizeMode="cover"
-        onLoadStart={() => setLoading(true)}
-        onLoadEnd={() => setLoading(false)}
+        contentFit="cover"
+        transition={180}
+        cachePolicy="memory-disk"
+        onLoad={() => setLoading(false)}
+        onError={() => setLoading(false)}
       />
     </View>
   );
 }
 
-export default function PostCard({ post, visible = true, onProfilePress, onReplyPress, index = 0 }) {
+function PostCard({ post, visible = true, onProfilePress, onReplyPress, index = 0 }) {
   const { toggleLike, themeMode } = useAppContext();
   const isDark = themeMode === "dark";
   const entrance = useRef(new Animated.Value(0)).current;
@@ -185,3 +195,5 @@ export default function PostCard({ post, visible = true, onProfilePress, onReply
     </Animated.View>
   );
 }
+
+export default memo(PostCard);

@@ -1,9 +1,9 @@
 export const profileUser = {
   id: "me",
-  name: "Lerato Mokoena",
-  username: "lerato.design",
-  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
-  bio: "Designing thoughtful interfaces and documenting tiny moments.",
+  name: "Mokopane Makhetha",
+  username: "mokopane.makhetha",
+  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+  bio: "Designing thoughtful interfaces, filming product moments, and refining social UI.",
   followers: "24.8K",
   following: 312
 };
@@ -358,8 +358,8 @@ export const mockPosts = [
     timestamp: "18m",
     content: "Shot a quick motion study for a feed card transition. Soft fade, small rise, nothing loud.",
     media: {
-      type: "image",
-      url: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80"
+      type: "video",
+      url: sampleVideos.blazes
     },
     liked: true,
     likes: 217,
@@ -409,8 +409,8 @@ export const mockPosts = [
     timestamp: "1h",
     content: "Pulled together a few color references for a calmer creator profile. Warm neutrals, softer highlights, fewer hard edges.",
     media: {
-      type: "image",
-      url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+      type: "video",
+      url: sampleVideos.escape
     },
     liked: false,
     likes: 143,
@@ -460,8 +460,8 @@ export const mockPosts = [
     timestamp: "2h",
     content: "Saved this frame because it feels like a launch poster for a smaller, more thoughtful product.",
     media: {
-      type: "image",
-      url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80"
+      type: "video",
+      url: sampleVideos.elephants
     },
     liked: false,
     likes: 77,
